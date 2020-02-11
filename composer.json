@@ -1,0 +1,90 @@
+{
+    "name": "dxpr/lightning-dxpr-project",
+    "description": "Project template for Drupal 8 sites built with the DXPR Lightning distribution.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "DXPR",
+            "homepage": "https://github.com/dxpr",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "http://drupal.org/project/issues/lightning_dxpr",
+        "source": "http://cgit.drupalcode.org/lightning_dxpr"
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    },
+    "require": {
+        "composer/installers": "^1.2",
+        "cweagans/composer-patches": "^1.6.0",
+        "drupal-composer/drupal-scaffold": "^2.0.0",
+        "dxpr/lightning-dxpr": "^1.0",
+        "oomphinc/composer-installers-extender": "~1.0"
+    },
+    "require-dev": {
+        "drush/drush": "^9.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "docroot/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "docroot/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
+        }
+    },
+    "scripts": {
+        "post-install-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+        "post-update-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    }
+}
