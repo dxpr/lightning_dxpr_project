@@ -28,7 +28,7 @@
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
-        "dxpr/lightning-dxpr": "^1.0",
+        "dxpr/lightning-dxpr": "dev-master",
         "oomphinc/composer-installers-extender": "~1.0"
     },
     "require-dev": {
