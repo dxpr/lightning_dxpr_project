@@ -48,6 +48,19 @@
                     "reference": "origin/8.x"
                 }
             }
+        },
+        "dxpr_test_content": {
+            "type": "package",
+            "package": {
+                "name": "jjroelofs/dxpr_test_content",
+                "type": "drupal-module",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/jjroelofs/dxpr_test_content",
+                    "type": "git",
+                    "reference": "origin/8.x"
+                }
+            }
         }
     },
     "require": {
