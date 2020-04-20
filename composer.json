@@ -28,11 +28,11 @@
             "package": {
                 "name": "jjroelofs/glazed",
                 "type": "drupal-theme",
-                "version": "dev-master",
+                "version": "1.1.7",
                 "source": {
                     "url": "https://github.com/jjroelofs/glazed",
                     "type": "git",
-                    "reference": "origin/8.x"
+                    "reference": "8.x"
                 }
             }
         },
@@ -41,11 +41,11 @@
             "package": {
                 "name": "jjroelofs/glazed_builder",
                 "type": "drupal-module",
-                "version": "dev-master",
+                "version": "1.4.3",
                 "source": {
                     "url": "https://github.com/jjroelofs/glazed_builder",
                     "type": "git",
-                    "reference": "origin/8.x"
+                    "reference": "8.x"
                 }
             }
         },
