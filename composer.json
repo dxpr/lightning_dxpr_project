@@ -32,7 +32,7 @@
                 "source": {
                     "url": "https://github.com/jjroelofs/glazed",
                     "type": "git",
-                    "reference": "8.x"
+                    "reference": "origin/8.x"
                 }
             }
         },
@@ -45,7 +45,7 @@
                 "source": {
                     "url": "https://github.com/jjroelofs/glazed_builder",
                     "type": "git",
-                    "reference": "8.x"
+                    "reference": "origin/8.x"
                 }
             }
         },
