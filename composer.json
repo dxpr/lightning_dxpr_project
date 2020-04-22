@@ -28,7 +28,7 @@
             "package": {
                 "name": "jjroelofs/glazed",
                 "type": "drupal-theme",
-                "version": "8.x",
+                "version": "8.x-dev",
                 "source": {
                     "url": "https://github.com/jjroelofs/glazed",
                     "type": "git",
@@ -41,7 +41,7 @@
             "package": {
                 "name": "jjroelofs/glazed_builder",
                 "type": "drupal-module",
-                "version": "8.x",
+                "version": "8.x-dev",
                 "source": {
                     "url": "https://github.com/jjroelofs/glazed_builder",
                     "type": "git",
