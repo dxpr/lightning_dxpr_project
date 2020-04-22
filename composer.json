@@ -48,7 +48,7 @@
                     "reference": "origin/8.x"
                 }
             }
-        },
+        }
     },
     "require": {
         "composer/installers": "^1.2",
