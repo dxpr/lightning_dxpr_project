@@ -23,27 +23,27 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         },
-        "glazed": {
+        "dxpr": {
             "type": "package",
             "package": {
-                "name": "jjroelofs/glazed",
+                "name": "dxpr/dxpr",
                 "type": "drupal-theme",
                 "version": "dev-master",
                 "source": {
-                    "url": "https://github.com/jjroelofs/glazed",
+                    "url": "https://github.com/dxpr/dxpr",
                     "type": "git",
                     "reference": "origin/8.x"
                 }
             }
         },
-        "glazed_builder": {
+        "dxpr_builder": {
             "type": "package",
             "package": {
-                "name": "jjroelofs/glazed_builder",
+                "name": "dxpr/dxpr_builder",
                 "type": "drupal-module",
                 "version": "dev-master",
                 "source": {
-                    "url": "https://github.com/jjroelofs/glazed_builder",
+                    "url": "https://github.com/dxpr/dxpr_builder",
                     "type": "git",
                     "reference": "origin/8.x"
                 }
