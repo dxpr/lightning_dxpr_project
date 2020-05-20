@@ -14,48 +14,26 @@
         "issues": "http://drupal.org/project/issues/lightning_dxpr",
         "source": "http://cgit.drupalcode.org/lightning_dxpr"
     },
-    "repositories": {
-        "drupal": {
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.dxpr.com/8"
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        "assets": {
+        {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        "dxpr": {
-            "type": "package",
-            "package": {
-                "name": "dxpr/dxpr",
-                "type": "drupal-theme",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/dxpr/dxpr",
-                    "type": "git",
-                    "reference": "origin/8.x"
-                }
-            }
-        },
-        "dxpr_builder": {
-            "type": "package",
-            "package": {
-                "name": "dxpr/dxpr_builder",
-                "type": "drupal-module",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/dxpr/dxpr_builder",
-                    "type": "git",
-                    "reference": "origin/8.x"
-                }
-            }
         }
-    },
+    ],
     "require": {
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
-        "dxpr/lightning_dxpr": "8.x-dev",
-        "oomphinc/composer-installers-extender": "~1.0"
+        "oomphinc/composer-installers-extender": "~1.0",
+        "dxpr/lightning_dxpr": "8.x-dev"
     },
     "require-dev": {
         "drush/drush": "^9.0"
