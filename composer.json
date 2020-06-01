@@ -3,17 +3,24 @@
     "description": "Project template for Drupal 8 sites built with the DXPR Lightning distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
+    "keywords": [
+        "DXPR",
+        "Drupal",
+        "Marketing",
+        "Acquia",
+        "Lightning"
+    ],
+    "support": {
+        "documentation": "https:/.dxpr.com/hc",
+        "issues": "https://dxpr.com/hc/tickets"
+    },
     "authors": [
         {
             "name": "DXPR",
-            "homepage": "https://github.com/dxpr",
+            "homepage": "https://dxpr.com",
             "role": "Maintainer"
         }
     ],
-    "support": {
-        "issues": "http://drupal.org/project/issues/lightning_dxpr",
-        "source": "http://cgit.drupalcode.org/lightning_dxpr"
-    },
     "repositories": [
         {
             "type": "composer",
