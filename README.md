@@ -18,6 +18,20 @@ Lightning DXPR is a sub-profile of Acquia Lightning that installs our DXPR Theme
 $ composer config --global bearer.packages.dxpr.com <access_token>
 ```
 
+## Troubleshooting
+
+### *Killed* or *Memory* related message
+
+Composer requires a lot of memory, try (temporarily) upgrading your cloud or VPS machine to at least 4GB of memory.
+
+### The requested PHP extension *curl* is missing from your system
+
+If composer reports *curl* or some other PHP extension is missing you have to install this extension. On Ubuntu or Debian you can fix this with a single command:
+
+`install apt-get install php7.4-mbstring`
+
+Replace 7.4 with the PHP branch you are using.
+
 ## Non-interactive Profile installation
 
 1. `composer clearcache`
@@ -26,15 +40,15 @@ $ composer config --global bearer.packages.dxpr.com <access_token>
 4. `mysql -u MYSQL_USERNAME -p -e "create database EXAMPLE_DATABASE_NAME;"`
 5. `drush site-install lightning_dxpr lightning_dxpr_demo_select.demo_select=dxpr_basic_demo --db-url=mysql://MYSQL_USERNAME@localhost:3306/EXAMPLE_DATABASE_NAME --account-pass=admin -y -v`
 
-# Demo Sites Included
+## Demo Sites Included
 
 By default the installation profile will install "Basic Demo" content and configuration.
 
-## To install without demo content:
+### To install without demo content:
 
 Replace `demo_select=dxpr_basic_demo` with `demo_select=none` in command 5.
 
-## To install the Logistics Demo:
+### To install the Logistics Demo:
 
 Replace `demo_select=dxpr_basic_demo` with `demo_select=dxpr_logistics_demo` in command 5.
 
