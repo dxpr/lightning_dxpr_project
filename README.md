@@ -29,7 +29,9 @@ $ composer config --global bearer.packages.dxpr.com <access_token>
 
 If composer reports *curl* or some other PHP extension is missing you have to install this extension. On Ubuntu or Debian you can fix this with a single command:
 
-`install apt-get install php7.4-mbstring`
+```bash
+$ install apt-get install php7.4-mbstring
+```
 
 Replace 7.4 with the PHP branch you are using.
 
