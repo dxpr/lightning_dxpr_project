@@ -22,7 +22,7 @@ $ composer config --global bearer.packages.dxpr.com <access_token>
 
 ### *Killed* message or *Memory* related message
 
-* Composer installation requires a lot of resources, try (temporarily) upgrading your cloud or VPS machine to at least **4GB** of memory and **4 vcpu**.
+* Composer installation requires a lot of resources, try (temporarily) upgrading your cloud or VPS machine to at least **4GB** of memory and **4 vcpu**. The more the merrier.
 * Make sure your PHP memory limit is set to "-1" during installation. Documentation: https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
 
 ### The requested PHP extension *curl* is missing from your system
