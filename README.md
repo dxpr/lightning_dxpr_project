@@ -1,4 +1,9 @@
-## lightning_dxpr
+## This is a Composer-based installer for the Lightning DXPR Drupal distribution. The Drupal Distribution that makes marketers fall in love with Drupal!
+
+This is a sub-profile of Acquia Lightning that installs our DXPR Theme and DXPR Builder products, giving you our state-of-the-art marketing Drupal tools integrated with Acquia's Lightning features   
+
+- https://github.com/acquia/lightning-project
+- https://github.com/acquia/lightning
 
 
 ## Authentication
@@ -14,7 +19,7 @@ $ composer config --global bearer.packages.dxpr.com <access_token>
 
 ## Non-interactive Profile installation
 
-1. `composer clearcache`
+1. `composer clearcache;composer self-update`
 2. `composer create-project dxpr/lightning-dxpr-project:1.x-dev EXAMPLE_DIRECTORY`
 3. `cd EXAMPLE_DIRECTORY/docroot`
 4. `mysql -u MYSQL_USERNAME -p -e "create database EXAMPLE_DATABASE_NAME;"`
