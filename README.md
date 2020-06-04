@@ -20,7 +20,7 @@ $ composer config --global bearer.packages.dxpr.com <access_token>
 
 ## Troubleshooting
 
-### *Killed* or *Memory* related message
+### *Killed* message or *Memory* related message
 
 * Composer requires a lot of memory, try (temporarily) upgrading your cloud or VPS machine to at least 4GB of memory.
 * Make sure your PHP memory limit is set to "-1" during installation. Documentation: https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
