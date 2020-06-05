@@ -20,9 +20,10 @@ $ composer config --global bearer.packages.dxpr.com <access_token>
 
 ## Composer build
 
-~~~
-composer clearcache
-composer create-project dxpr/lightning-dxpr-project:1.x-dev EXAMPLE_DIRECTORY
+```bash
+$ composer clearcache
+$ composer create-project dxpr/lightning-dxpr-project:1.x-dev EXAMPLE_DIRECTORY
+```
 
 ## Troubleshooting
 
