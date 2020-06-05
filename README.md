@@ -18,6 +18,12 @@ Lightning DXPR is a sub-profile of Acquia Lightning that installs our DXPR Theme
 $ composer config --global bearer.packages.dxpr.com <access_token>
 ```
 
+## Composer build
+
+~~~
+composer clearcache
+composer create-project dxpr/lightning-dxpr-project:1.x-dev EXAMPLE_DIRECTORY
+
 ## Troubleshooting
 
 ### *Killed* message or *Memory* related message
