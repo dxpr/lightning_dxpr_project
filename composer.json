@@ -43,7 +43,7 @@
         "dxpr/lightning_dxpr": "^2.0"
     },
     "require-dev": {
-        "drush/drush": "^9.0"
+        "drush/drush": "^10.0"
     },
     "conflict": {
         "drupal/drupal": "*"
