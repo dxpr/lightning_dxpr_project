@@ -32,12 +32,18 @@ $ composer create-project dxpr/lightning-dxpr-project EXAMPLE_DIRECTORY
 * Composer installation requires a lot of resources, try (temporarily) upgrading your cloud or VPS machine to at least **4GB** of memory and **4 vcpu**. The more the merrier.
 * Make sure your PHP memory limit is set to "-1" during installation. Documentation: https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
 
-### The requested PHP extension *curl* is missing from your system
+### The requested PHP extension *curl/DOM/etc* is missing from your system
 
-If composer reports *curl* or some other PHP extension is missing you have to install this extension. On Ubuntu or Debian you can fix this with a single command:
+If composer reports *curl* or some other PHP extension is missing you have to install this extension:
 
 ```bash
-$ install apt-get install php7.4-mbstring
+$ apt-get install php-curl
+```
+
+On a fresh Ubuntu or Debian machine you may need to run the following commands:
+
+```
+a2enmod rewrite;apt-get install php-curl;apt-get install php-dom
 ```
 
 Replace 7.4 with the PHP branch you are using.
