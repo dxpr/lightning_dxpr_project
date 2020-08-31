@@ -22,7 +22,7 @@ $ composer config --global bearer.packages.dxpr.com <access_token>
 
 ```bash
 $ composer clearcache
-$ composer create-project dxpr/lightning-dxpr-project:1.x-dev EXAMPLE_DIRECTORY
+$ composer create-project dxpr/lightning-dxpr-project EXAMPLE_DIRECTORY
 ```
 
 ## Troubleshooting
