@@ -27,6 +27,16 @@ $ composer create-project dxpr/lightning-dxpr-project EXAMPLE_DIRECTORY
 
 ## Troubleshooting
 
+### Composer asks for password or token
+
+This means your composer web token was not installed successfully. Please verify that your token is installed by running the following command:
+
+```
+cat ~/.composer/auth.json
+```
+
+You should install the token in the user folder of the user you use to run `composer install`.
+
 ### *Killed* message or *Memory* related message
 
 * Composer installation requires a lot of resources, try (temporarily) upgrading your cloud or VPS machine to at least **4GB** of memory and **4 vcpu**. The more the merrier.
