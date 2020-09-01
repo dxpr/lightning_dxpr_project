@@ -25,6 +25,11 @@ $ composer clearcache
 $ composer create-project dxpr/lightning-dxpr-project EXAMPLE_DIRECTORY
 ```
 
+## Non-interactive Profile installation
+
+Continue instructions at https://github.com/dxpr/lightning_dxpr
+
+
 ## Troubleshooting
 
 ### Composer asks for password or token
@@ -59,9 +64,4 @@ a2enmod rewrite;apt-get install php-curl;apt-get install php-dom
 ```
 
 Replace 7.4 with the PHP branch you are using.
-
-## Non-interactive Profile installation
-
-Continue instructions at https://github.com/dxpr/lightning_dxpr
-
 
