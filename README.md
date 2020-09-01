@@ -35,6 +35,8 @@ This means your composer web token was not installed successfully. Please verify
 cat ~/.composer/auth.json
 ```
 
+The output should look similar to this: https://app.dxpr.com/sites/default/files/verify-composer-dxpr.jpg
+
 You should install the token in the user folder of the user you use to run `composer install`.
 
 ### *Killed* message or *Memory* related message
