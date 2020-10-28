@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  composer-1:
+    image: dxpr/composer:1
+    build:
+      context: ./hack/composer
+      args:
+        COMPOSER_VERSION: "1.10"
+    working_dir: /opt/app
+    command: bash run-dev.sh
+    tty: true
+    environment:
+      DXPR_ACCESS_TOKEN: ${DXPR_ACCESS_TOKEN}
+    volumes:
+      - .:/opt/app
+
+  composer-2:
+    image: dxpr/composer:2
+    build:
+      context: ./hack/composer
+      args:
+        COMPOSER_VERSION: "2"
+    working_dir: /opt/app
+    command: bash run-dev.sh
+    tty: true
+    environment:
+      DXPR_ACCESS_TOKEN: ${DXPR_ACCESS_TOKEN}
+    volumes:
+      - .:/opt/app
