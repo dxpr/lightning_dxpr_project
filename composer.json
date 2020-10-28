@@ -38,12 +38,12 @@
     "require": {
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.0",
-        "drupal-composer/drupal-scaffold": "^2.0.0",
-        "oomphinc/composer-installers-extender": "~1.0",
+        "drupal/core-composer-scaffold": "*",
+        "oomphinc/composer-installers-extender": "^1.1 || ^2",
         "dxpr/lightning_dxpr": "^1.0"
     },
     "require-dev": {
-        "drush/drush": "^9.0"
+        "drush/drush": ">=9.7"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -51,13 +51,16 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "process-timeout": 0,
-        "sort-packages": true,
-        "optimize-autoloader": true
+        "process-timeout": 0
     },
     "extra": {
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "docroot/"
+            }
+        },
         "patchLevel": {
             "drupal/core": "-p2"
         },
@@ -93,9 +96,5 @@
                 "type:drupal-custom-theme"
             ]
         }
-    },
-    "scripts": {
-        "post-install-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "post-update-cmd": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
     }
 }
