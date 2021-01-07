@@ -6,7 +6,7 @@ services:
     build:
       context: ./hack/composer
       args:
-        COMPOSER_VERSION: "1.10"
+        COMPOSER_VERSION: "1"
     working_dir: /opt/app
     command: bash run-dev.sh
     tty: true
