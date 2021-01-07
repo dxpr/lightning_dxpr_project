@@ -15,10 +15,29 @@ env:
 
 jobs:
 
-  composer-1:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+  # to be available when upstream repo triggers the event
+  payload:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    steps:
+    - name: wait 3m when triggered by upstream
+      run: |
+        # workaround: wait ~3 min for https://packagist.org/packages/dxpr/lightning-dxpr-project#2.x-dev to be updated
+        # it's perfect if packagist supports hook to trigger when the package is updated
+        # note: this will take 3m of github actions minutes quota without doing anything
+        if [ "$REPO_GITHUB_REF" != "" ] && [ "$REPO_GITHUB_SHA" != "" ] ; then
+          echo "waiting 3m for https://packagist.org/packages/dxpr/lightning-dxpr-project#2.x-dev to be updated"
+          sleep 3m
+        fi
+      env:
+        PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        REPO_GITHUB_REF: ${{ github.event.client_payload.repository.GITHUB_REF }}
+        REPO_GITHUB_SHA: ${{ github.event.client_payload.repository.GITHUB_SHA }}
 
+  composer-1:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 15
+    needs: [payload]
     steps:
     - uses: actions/checkout@v2
 
@@ -28,9 +47,9 @@ jobs:
 
 
   composer-2:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 15
-
+    needs: [payload]
     steps:
     - uses: actions/checkout@v2
 
