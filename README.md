@@ -8,7 +8,7 @@ Lightning DXPR is a sub-profile of Acquia Lightning that installs our DXPR Theme
 
 ## Authentication
 
-- To access `dxpr/dxpr_builder` packages, you need to to have an active subscription at DXPR.com. You can find your token here: https://app.dxpr.com/download/all#composer. This token is unique to your DXPR.com account and should be kept secret, like a password. 
+- To access `dxpr/dxpr_builder` packages, you need to to have an active subscription at DXPR.com. You can find your token here: https://app.dxpr.com/download/all#token. This token is unique to your DXPR.com account and should be kept secret, like a password. 
 
 - Make sure composer is at version 1.10 or higher
 
