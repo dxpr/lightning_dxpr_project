@@ -20,6 +20,7 @@ services:
     entrypoint: ./qa-demo.sh
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      PHP_MEMORY_LIMIT: 1024M
 #      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S opensmtpd:25
 #      DB_HOST: $DB_HOST
 #      DB_PORT: $DB_PORT
