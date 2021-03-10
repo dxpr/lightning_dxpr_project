@@ -28,3 +28,5 @@ composer.lock
 
 # Ignore .env files as they are personal
 /.env
+/.editorconfig
+/.gitattributes
