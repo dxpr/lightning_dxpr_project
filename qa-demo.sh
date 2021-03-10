@@ -3,6 +3,12 @@
 # Installing DXPR QA demo website
 . ./.env
 
+if [ -z "$DXPR_ACCESS_TOKEN" ]
+then
+      echo "\$DXPR_ACCESS_TOKEN is empty"
+      return
+fi
+
 composer config --global bearer.packages.dxpr.com $DXPR_ACCESS_TOKEN
 
 composer require dxpr/dxpr_builder_e
