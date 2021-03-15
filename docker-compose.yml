@@ -19,6 +19,11 @@ services:
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_MEMORY_LIMIT: 1024M
+      DXPR_DEMO: $DXPR_DEMO
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DXPR_ADMIN_PASSWORD: $DXPR_ADMIN_PASSWORD
       DXPR_ACCESS_TOKEN: $DXPR_ACCESS_TOKEN
 #      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S opensmtpd:25
 #      DB_HOST: $DB_HOST
