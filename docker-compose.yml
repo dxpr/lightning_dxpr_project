@@ -16,11 +16,10 @@ services:
 
   php:
     image: wodby/drupal-php:$PHP_TAG
-    container_name: "${PROJECT_NAME}_php"
-    entrypoint: ./qa-demo.sh
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_MEMORY_LIMIT: 1024M
+      DXPR_ACCESS_TOKEN: $DXPR_ACCESS_TOKEN
 #      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S opensmtpd:25
 #      DB_HOST: $DB_HOST
 #      DB_PORT: $DB_PORT
@@ -46,6 +45,7 @@ services:
 #      MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless"]}}, "http://chrome:9515"]'
     volumes:
     - ./:/var/www/html:cached
+    - ./demo-install-init.d:/docker-entrypoint-init.d/
 
   nginx:
     image: wodby/nginx:$NGINX_TAG
