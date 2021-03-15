@@ -16,6 +16,9 @@ services:
 
   php:
     image: wodby/drupal-php:$PHP_TAG
+    container_name: "${PROJECT_NAME}_php"
+    depends_on:
+    - mariadb
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_MEMORY_LIMIT: 1024M
@@ -115,6 +118,7 @@ services:
   
   composer-1:
     image: dxpr/composer:1
+    profiles: ["github-actions"]
     build:
       context: ./hack/composer
       args:
@@ -129,6 +133,7 @@ services:
 
   composer-2:
     image: dxpr/composer:2
+    profiles: ["github-actions"]
     build:
       context: ./hack/composer
       args:
