@@ -22,7 +22,6 @@ services:
     container_name: "${PROJECT_NAME}_php"
     build:
       context: .
-      dockerfile: Dockerfile.build
       args:
         PHP_TAG: $PHP_TAG
     profiles: ["build"]
