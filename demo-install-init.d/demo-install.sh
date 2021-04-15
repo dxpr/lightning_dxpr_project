@@ -25,3 +25,13 @@ drush site-install lightning_dxpr lightning_dxpr_demo_select.demo_select=$DXPR_D
 
 # Allow accessing website assets
 chmod -R 777 docroot/sites/default/files
+
+if [ "$DXPR_BUILDER_MODE" = "dev" ]; then
+
+  echo "Removing the dxpr builder module"
+  rm -rf docroot/modules/contrib/dxpr_builder
+
+  echo "Linking to the dxpr builder module"
+  ln -s $DXPR_BUILDER_CONTAINER docroot/modules/contrib/dxpr_builder
+
+fi

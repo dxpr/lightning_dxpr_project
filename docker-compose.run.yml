@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+
+  ### Override the nginx service to have the qa-demo service as a backend host
+  nginx:
+    depends_on:
+    - qa-demo
+    environment:
+      NGINX_BACKEND_HOST: qa-demo

@@ -1,121 +1,139 @@
 version: "3.7"
 
+volumes:
+  ### Holding the qa-demo src code
+  qa-demo-data:
+
+  ### qa-demo database volume
+  qa-demo-db:
+
+  ### qa-demo dxpr_builder module volume
+  dxpr-builder:
+
 services:
+
+  #####################
+  ### Main services ###
+  #####################
+
+  ### services router
+  traefik:
+    image: traefik:v2.0
+    container_name: "${PROJECT_NAME}_traefik"
+    profiles: ["build", "dev"]
+    command: --api.insecure=true --providers.docker
+    ports:
+    - '8000:80'
+    # - '8080:8080' # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  ### Database service
   mariadb:
     image: wodby/mariadb:$MARIADB_TAG
     container_name: "${PROJECT_NAME}_mariadb"
+    profiles: ["build", "dev"]
     stop_grace_period: 30s
     environment:
       MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
       MYSQL_DATABASE: $DB_NAME
       MYSQL_USER: $DB_USER
       MYSQL_PASSWORD: $DB_PASSWORD
-  #  volumes:
+    volumes:
     #  - ./mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
-    #  - /path/to/mariadb/data/on/host:/var/lib/mysql # Use bind mount
+    - qa-demo-db:/var/lib/mysql # Persist data using volumes
+    # - /var/lib/mysql:/var/lib/mysql # Persist data using bind mounts
 
-  php:
-    image: wodby/drupal-php:$PHP_TAG
-    container_name: "${PROJECT_NAME}_php"
+  ### PHP service with a drupal demo installed
+  qa-demo:
+    image: dxpr/qa-demo:latest
+    container_name: "${PROJECT_NAME}_qa_demo"
+    profiles: ["dev"]
     depends_on:
     - mariadb
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_MEMORY_LIMIT: 1024M
-      DXPR_DEMO: $DXPR_DEMO
-      DB_USER: $DB_USER
-      DB_PASSWORD: $DB_PASSWORD
-      DB_NAME: $DB_NAME
-      DXPR_ADMIN_PASSWORD: $DXPR_ADMIN_PASSWORD
-      DXPR_ACCESS_TOKEN: $DXPR_ACCESS_TOKEN
-#      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S opensmtpd:25
-#      DB_HOST: $DB_HOST
-#      DB_PORT: $DB_PORT
-#      DB_USER: $DB_USER
-#      DB_PASSWORD: $DB_PASSWORD
-#      DB_NAME: $DB_NAME
-#      DB_DRIVER: $DB_DRIVER
-#      PHP_FPM_USER: wodby
-#      PHP_FPM_GROUP: wodby
-#      COLUMNS: 80 # Set 80 columns for docker exec -it.
-#      # Read instructions at https://wodby.com/docs/stacks/php/local/#xdebug
-#      PHP_XDEBUG: 1
-#      PHP_XDEBUG_MODE: debug
-#      PHP_IDE_CONFIG: serverName=my-ide
-#      PHP_XDEBUG_IDEKEY: "my-ide"
-#      PHP_XDEBUG_CLIENT_HOST: 172.17.0.1 # Linux
-#      PHP_XDEBUG_CLIENT_HOST: host.docker.internal # Docker 18.03+ Mac/Win
-#      PHP_XDEBUG_CLIENT_HOST: 10.0.75.1 # Windows, Docker < 18.03
-#      PHP_XDEBUG_LOG: /tmp/php-xdebug.log
-#      # PHPUnit Drupal testing configurations
-#      SIMPLETEST_BASE_URL: "http://nginx"
-#      SIMPLETEST_DB: "${DB_DRIVER}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}#tests_"
-#      MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless"]}}, "http://chrome:9515"]'
     volumes:
-    - ./:/var/www/html:cached
-    - ./demo-install-init.d:/docker-entrypoint-init.d/
+    - qa-demo-data:/var/www/html:cached # Use volume mount for testing/prod
+    # - ./:/var/www/html:cached # Use bind mount for local development
+    - dxpr-builder:$DXPR_BUILDER_CONTAINER # Use volume mount for testing/prod
+    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER # Use bind mount for local development
 
+  ### Web server
   nginx:
     image: wodby/nginx:$NGINX_TAG
     container_name: "${PROJECT_NAME}_nginx"
-    depends_on:
-    - php
+    profiles: ["build", "dev"]
     environment:
       NGINX_STATIC_OPEN_FILE_CACHE: "off"
       NGINX_ERROR_LOG_LEVEL: debug
-      NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html/docroot
       NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
-    #      NGINX_DRUPAL_FILE_PROXY_URL: http://example.com
     volumes:
-    - ./:/var/www/html:cached
-
+    - qa-demo-data:/var/www/html:cached
+    # - ./:/var/www/html:cached # Use bind mount for local development
+    - dxpr-builder:$DXPR_BUILDER_CONTAINER # Use volume mount for testing/prod
+    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER # Use bind mount for local development
     labels:
+    - "traefik.enable=true"
     - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
 
+  ### TODO: Remove if not needed
   mailhog:
     image: mailhog/mailhog
     container_name: "${PROJECT_NAME}_mailhog"
+    profiles: ["build", "dev"]
     labels:
     - "traefik.http.services.${PROJECT_NAME}_mailhog.loadbalancer.server.port=8025"
     - "traefik.http.routers.${PROJECT_NAME}_mailhog.rule=Host(`mailhog.${PROJECT_BASE_URL}`)"
 
-#  node:
-#    image: wodby/node:$NODE_TAG
-#    container_name: "${PROJECT_NAME}_node"
-#    working_dir: /var/www/html/path/to/theme/to/build
-#    labels:
-#    - "traefik.http.services.${PROJECT_NAME}_node.loadbalancer.server.port=3000"
-#    - "traefik.http.routers.${PROJECT_NAME}_node.rule=Host(`node.${PROJECT_BASE_URL}`)"
-#    expose:
-#    - "3000"
-#    volumes:
-#    - ./:/var/www/html
-#    command: sh -c 'yarn install && yarn run start'
-
-#  chrome:
-#    image: selenium/standalone-chrome:$SELENIUM_CHROME_TAG
-#    container_name: "${PROJECT_NAME}_chrome"
-#    volumes:
-#    - /dev/shm:/dev/shm
-#    entrypoint:
-#    - chromedriver
-#    - "--no-sandbox"
-#    - "--disable-dev-shm-usage"
-#    - "--log-path=/tmp/chromedriver.log"
-#    - "--verbose"
-#    - "--whitelisted-ips="
-
-  traefik:
-    image: traefik:v2.0
-    container_name: "${PROJECT_NAME}_traefik"
-    command: --api.insecure=true --providers.docker
-    ports:
-    - '8000:80'
-#    - '8080:8080' # Dashboard
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  ########################
+  ### TESTING SERVICES ###
+  ########################
   
+  ### Standalone chrome node
+  chrome:
+    image: selenium/node-chrome:4.0.0-beta-3-prerelease-20210321
+    container_name: "${PROJECT_NAME}_chrome"
+    profiles: ["test"]
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6900:5900"
+
+  ### Selenium grid
+  selenium-hub:
+    image: selenium/hub:4.0.0-beta-3-prerelease-20210321
+    container_name: "${PROJECT_NAME}_selenium_hub"
+    profiles: ["test"]
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  ### Java selenium tests
+  maven:
+    image: dxpr/dxpr_maven
+    profiles: ["test"]
+    container_name: "${PROJECT_NAME}_maven"
+    depends_on:
+    - chrome
+    build:
+      context: ./maven
+      args: 
+        SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+        DXPR_MAVEN_TAG: $DXPR_MAVEN_TAG
+
+  #####################################
+  ### Testing composer installation ###
+  #####################################
   composer-1:
     image: dxpr/composer:1
     profiles: ["github-actions"]
