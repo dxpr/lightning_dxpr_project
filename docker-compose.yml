@@ -20,7 +20,7 @@ services:
   traefik:
     image: traefik:v2.0
     container_name: "${PROJECT_NAME}_traefik"
-    profiles: ["build", "dev"]
+    profiles: ["qa-demo"]
     command: --api.insecure=true --providers.docker
     ports:
     - '8000:80'
@@ -32,7 +32,7 @@ services:
   mariadb:
     image: wodby/mariadb:$MARIADB_TAG
     container_name: "${PROJECT_NAME}_mariadb"
-    profiles: ["build", "dev"]
+    profiles: ["qa-demo"]
     stop_grace_period: 30s
     environment:
       MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
@@ -48,7 +48,7 @@ services:
   qa-demo:
     image: dxpr/qa-demo:latest
     container_name: "${PROJECT_NAME}_qa_demo"
-    profiles: ["dev"]
+    profiles: ["qa-demo"]
     depends_on:
     - mariadb
     environment:
@@ -64,8 +64,11 @@ services:
   nginx:
     image: wodby/nginx:$NGINX_TAG
     container_name: "${PROJECT_NAME}_nginx"
-    profiles: ["build", "dev"]
+    profiles: ["qa-demo"]
+    depends_on:
+    - qa-demo
     environment:
+      NGINX_BACKEND_HOST: qa-demo
       NGINX_STATIC_OPEN_FILE_CACHE: "off"
       NGINX_ERROR_LOG_LEVEL: debug
       NGINX_SERVER_ROOT: /var/www/html/docroot
@@ -83,53 +86,10 @@ services:
   mailhog:
     image: mailhog/mailhog
     container_name: "${PROJECT_NAME}_mailhog"
-    profiles: ["build", "dev"]
+    profiles: ["qa-demo"]
     labels:
     - "traefik.http.services.${PROJECT_NAME}_mailhog.loadbalancer.server.port=8025"
     - "traefik.http.routers.${PROJECT_NAME}_mailhog.rule=Host(`mailhog.${PROJECT_BASE_URL}`)"
-
-  ########################
-  ### TESTING SERVICES ###
-  ########################
-  
-  ### Standalone chrome node
-  chrome:
-    image: selenium/node-chrome:4.0.0-beta-3-prerelease-20210321
-    container_name: "${PROJECT_NAME}_chrome"
-    profiles: ["test"]
-    volumes:
-      - /dev/shm:/dev/shm
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    ports:
-      - "6900:5900"
-
-  ### Selenium grid
-  selenium-hub:
-    image: selenium/hub:4.0.0-beta-3-prerelease-20210321
-    container_name: "${PROJECT_NAME}_selenium_hub"
-    profiles: ["test"]
-    ports:
-      - "4442:4442"
-      - "4443:4443"
-      - "4444:4444"
-
-  ### Java selenium tests
-  maven:
-    image: dxpr/dxpr_maven
-    profiles: ["test"]
-    container_name: "${PROJECT_NAME}_maven"
-    depends_on:
-    - chrome
-    build:
-      context: ./maven
-      args: 
-        SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
-        DXPR_MAVEN_TAG: $DXPR_MAVEN_TAG
 
   #####################################
   ### Testing composer installation ###

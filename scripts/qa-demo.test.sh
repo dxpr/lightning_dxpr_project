@@ -1,3 +1,11 @@
 #!/bin/bash
 
-docker-compose --profile test up -d && docker-compose logs -f maven
+docker-compose \
+  -f docker-compose.yml
+  -f docker-compose.test.yml
+  --profile qa-demo --profile test \
+  up -d \
+  && docker-compose \
+  -f docker-compose.yml
+  -f docker-compose.test.yml
+  logs -f
