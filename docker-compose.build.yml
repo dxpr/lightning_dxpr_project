@@ -1,50 +1,38 @@
+### compose file containing services to build images only
+
 version: "3.7"
 
 services:
 
-  ### Building the dxpr builder
+  ### Building the dxpr/builder image
   dxpr-builder:
-    image: dxpr/dxpr-builder:$DXPR_BUILDER_MODE
-    profiles: ["build"]
+    image: dxpr/builder:$DXPR_BUILDER_MODE
     entrypoint: /bin/sh
+    profiles: ["foo"]
     build:
       context: ./dxpr-builder
       args:
         SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
         DXPR_BUILDER_TAG: $DXPR_BUILDER_TAG
         PHP_TAG: $PHP_TAG
-    volumes:
-      - dxpr-builder:/usr/src/dxpr_builder
-
-  ### Adding the php service to build the dxpr/qa-demo image used in the qa-demo service
-  php:
+  
+  ### Building the dxpr/qa-demo image
+  qa-demo:
     image: dxpr/qa-demo
     container_name: "${PROJECT_NAME}_php"
+    profiles: ["build"]
     build:
       context: .
       args:
         PHP_TAG: $PHP_TAG
-    profiles: ["build"]
-    depends_on:
-    - mariadb
-    environment:
-      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
-      DXPR_DEMO: $DXPR_DEMO
-      DB_USER: $DB_USER
-      DB_PASSWORD: $DB_PASSWORD
-      DB_NAME: $DB_NAME
-      DXPR_ADMIN_PASSWORD: $DXPR_ADMIN_PASSWORD
-      DXPR_ACCESS_TOKEN: $DXPR_ACCESS_TOKEN
-      DXPR_BUILDER_MODE: $DXPR_BUILDER_MODE #["dev", "prod"]
-      DXPR_BUILDER_CONTAINER: $DXPR_BUILDER_CONTAINER # Defaults to /usr/src/dxpr_builder
-    volumes:
-    - qa-demo-data:/var/www/html:cached
-    - dxpr-builder:$DXPR_BUILDER_CONTAINER ### Used for linking inside the demo-install-init.d entrypoint
-    - ./demo-install-init.d:/docker-entrypoint-init.d/
 
-  ### Override the nginx service to have the php service as a backend host
-  nginx:
-    depends_on:
-    - php
-    environment:
-      NGINX_BACKEND_HOST: php
+  ### Building the dxpr/maven image
+  maven:
+    image: dxpr/maven
+    profiles: ["build"]
+    container_name: "${PROJECT_NAME}_maven"
+    build:
+      context: ./maven
+      args: 
+        SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+        DXPR_MAVEN_TAG: $DXPR_MAVEN_TAG

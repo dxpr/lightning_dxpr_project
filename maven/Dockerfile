@@ -59,6 +59,9 @@ WORKDIR /usr/src/app
 COPY --from=intermediate /dxpr_maven /usr/src/app/
 RUN mvn -T 1C clean install -DskipTests && rm -rf target
 
-ENTRYPOINT ["/usr/bin/mvn", "test", "-DsuiteXmlFile=./testng_chrome.xml"]
+COPY ./wait-for-qa-demo.sh /
+RUN chmod +x /wait-for-qa-demo.sh
+
+ENTRYPOINT [ "/bin/bash", "/wait-for-qa-demo.sh", "drupal.docker.localhost", "mvn", "test", "-DsuiteXmlFile=./testng_chrome.xml" ]
 
 
