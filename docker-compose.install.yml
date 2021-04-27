@@ -4,9 +4,9 @@ version: "3.7"
 
 services:
 
-  ### Building the dxpr builder
+  ### Run the dxpr builder to populate the dxpr-builder volume
   dxpr-builder:
-    image: dxpr/dxpr-builder:$DXPR_BUILDER_MODE
+    image: dxpr/dxpr_builder:$DXPR_BUILDER_MODE
     entrypoint: /bin/sh
     profiles: ["dxpr-builder"]
     volumes:
@@ -16,9 +16,6 @@ services:
   qa-demo:
     image: dxpr/qa-demo
     container_name: "${PROJECT_NAME}_php"
-    profiles: ["qa-demo"]
-    depends_on:
-    - mariadb
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       DXPR_DEMO: $DXPR_DEMO
