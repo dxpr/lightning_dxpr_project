@@ -4,9 +4,9 @@ version: "3.7"
 
 services:
 
-  ### Building the dxpr builder
+  ### Run the dxpr builder to populate the dxpr-builder volume
   dxpr-builder:
-    image: dxpr/dxpr-builder:$DXPR_BUILDER_MODE
+    image: dxpr/dxpr_builder:$DXPR_BUILDER_MODE
     entrypoint: /bin/sh
     profiles: ["dxpr-builder"]
     volumes:
