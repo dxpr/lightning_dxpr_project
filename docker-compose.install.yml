@@ -16,9 +16,6 @@ services:
   qa-demo:
     image: dxpr/qa-demo
     container_name: "${PROJECT_NAME}_php"
-    profiles: ["qa-demo"]
-    depends_on:
-    - mariadb
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       DXPR_DEMO: $DXPR_DEMO
