@@ -28,7 +28,7 @@ services:
 
   ### Building the dxpr/maven image
   maven:
-    image: dxpr/maven
+    image: dxpr/maven:$DXPR_MAVEN_BUILD_TAG
     profiles: ["build"]
     container_name: "${PROJECT_NAME}_maven"
     build:
