@@ -56,7 +56,7 @@ services:
       PHP_MEMORY_LIMIT: 1024M
     volumes:
     - qa-demo-data:/var/www/html:cached # Use volume mount for testing/prod
-    # - ./:/var/www/html:cached # Use bind mount for local development
+    # - $SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER # Use bind mount for local development
     - dxpr-builder:$DXPR_BUILDER_CONTAINER # Use volume mount for testing/prod
     # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER # Use bind mount for local development
 
@@ -68,14 +68,14 @@ services:
     depends_on:
     - qa-demo
     environment:
-      NGINX_BACKEND_HOST: qa-demo
       NGINX_STATIC_OPEN_FILE_CACHE: "off"
       NGINX_ERROR_LOG_LEVEL: debug
-      NGINX_SERVER_ROOT: /var/www/html/docroot
+      NGINX_BACKEND_HOST: $NGINX_BACKEND_HOST
+      NGINX_SERVER_ROOT: $NGINX_SERVER_ROOT
       NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
     volumes:
-    - qa-demo-data:/var/www/html:cached
-    # - ./:/var/www/html:cached # Use bind mount for local development
+    - qa-demo-data:$SITE_INSTALLATION_CONTAINER
+    # - SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER # Use bind mount for local development
     - dxpr-builder:$DXPR_BUILDER_CONTAINER # Use volume mount for testing/prod
     # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER # Use bind mount for local development
     labels:

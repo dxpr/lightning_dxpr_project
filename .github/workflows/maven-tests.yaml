@@ -7,6 +7,7 @@ env:
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
   DXPR_ADMIN_PASSWORD: admin
   DXPR_DEMO: dxpr_qa_demo ### Available demos: [dxpr_basic_demo, dxpr_logistics_demo, dxpr_qa_demo]
+  SITE_INSTALLATION_CONTAINER: /var/www/html:cached  ### This is where to mount the site installation volume inside the container
 
   ### DXPR_BUILDER SETUP
   DXPR_BUILDER_MODE: prod ### Mode: ["dev", "prod"]
@@ -15,11 +16,12 @@ env:
   DXPR_BUILDER_HOST: /var/www/html/dxpr/1.x/dxpr_builder/ # FOR LOCAL DEVELOPMENT
 
   ### DXPR MAVEN SETUP
-  DXPR_MAVEN_TAG: 'main' ### A valid git tag or branch
+  DXPR_MAVEN_TAG: 'latest' ### A valid git tag or branch
 
   ### PROJECT SETTINGS
   PROJECT_NAME: my_drupal9_project
   PROJECT_BASE_URL: drupal.docker.localhost
+
   DB_NAME: drupal
   DB_USER: drupal
   DB_PASSWORD: drupal
@@ -28,10 +30,16 @@ env:
   DB_PORT: 3306
   DB_DRIVER: mysql
   MARIADB_TAG: 10.5-3.12.1
+
   DRUPAL_TAG: 9-4.28.0
+
   PHP_TAG: 7.4-dev-4.24.0
+
   NGINX_TAG: 1.19-5.13.1
   NGINX_VHOST_PRESET: drupal9
+  NGINX_BACKEND_HOST: qa-demo
+  NGINX_SERVER_ROOT: /var/www/html/docroot
+
   ATHENAPDF_TAG: 2.16.0
   DRUPAL_NODE_TAG: 1.0-2.0.0
   RSYSLOG_TAG: latest

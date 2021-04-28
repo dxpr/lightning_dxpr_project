@@ -30,7 +30,7 @@ services:
 
   ### Java selenium tests
   maven:
-    image: dxpr/maven
+    image: dxpr/maven:$DXPR_MAVEN_TAG
     profiles: ["test"]
     container_name: "${PROJECT_NAME}_maven"
     depends_on:
