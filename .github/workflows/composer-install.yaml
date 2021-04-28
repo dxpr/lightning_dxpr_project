@@ -1,14 +1,14 @@
 name: composer install tests
 
-# on:
-#   push:
-#   # to trigger manually with webhook
-#   # curl -X POST https://api.github.com/repos/:owner/:repo/dispatches \
-#   # -H 'Accept: application/vnd.github.everest-preview+json' \
-#   # -H 'Authorization: token TOKEN_VALUE_HERE' \
-#   # --data '{"event_type":"exec-composer-install","client_payload":{}}'
-#   repository_dispatch:
-#     types: [exec-composer-install]
+on:
+  push:
+  # to trigger manually with webhook
+  # curl -X POST https://api.github.com/repos/:owner/:repo/dispatches \
+  # -H 'Accept: application/vnd.github.everest-preview+json' \
+  # -H 'Authorization: token TOKEN_VALUE_HERE' \
+  # --data '{"event_type":"exec-composer-install","client_payload":{}}'
+  repository_dispatch:
+    types: [exec-composer-install]
 
 env:
   DXPR_ACCESS_TOKEN: ${{ secrets.DXPR_ACCESS_TOKEN }}
