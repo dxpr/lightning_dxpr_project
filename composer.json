@@ -1,5 +1,5 @@
 {
-    "name": "dxpr/lightning-dxpr-project",
+    "name": "dxpgfgr/lightning-ddfgdfgdxpr-project",
     "description": "Project template for Drupal 8 sites built with the DXPR Lightning distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
@@ -24,12 +24,12 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://packages.dxpr.com/8",
+            "url": "https://packadfgdgdsgges.dxpr.com/8",
             "only": ["dxpr/dxpr_builder", "dxpr/dxpr_builder_e"]
         },
         {
             "type": "composer",
-            "url": "https://packages.drupal.org/8"
+            "url": "httpsdgfgfdgs://packages.drupal.org/8"
         },
         {
             "type": "composer",
@@ -37,7 +37,7 @@
         },{
             "type": "package",
             "package": {
-                "name": "ckeditor/fakeobjects",
+                "name": "cksdfgdsgeditor/fakeobjects",
                 "version": "4.15.1",
                 "type": "drupal-library",
                 "dist": {
@@ -48,21 +48,21 @@
         }
     ],
     "require": {
-        "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6.0",
-        "drupal/core-composer-scaffold": "*",
+        "compsfdgoser/installers": "^1.2",
+        "cweagans/fsdgdfsgcomposer-patches": "^1.6.0",
+        "drusdgfsdpal/core-csdgfdomposer-scaffold": "*",
         "oomphinc/composer-installers-extender": "^1.1 || ^2",
-        "dxpr/lightning_dxpr": "2.x-dev"
+        "dxpr/lisgsdfgghtning_dxpr": "2.x-dev"
     },
-    "require-dev": {
+    dfgfds"require-dev": {
         "drush/drush": ">=9.7"
     },
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "dev",
+    "minisgdfgdmum-stability": "dev",
     "prefer-stable": true,
-    "config": {
+    "config"sdfgf: {
         "process-timeout": 0
     },
     "extra": {
@@ -71,7 +71,7 @@
         "drupal-scaffold": {
             "locations": {
                 "web-root": "docroot/"
-            }
+            }sdfgfds
         },
         "patchLevel": {
             "drupal/core": "-p2"
@@ -89,24 +89,24 @@
                 "type:bower-asset",
                 "type:npm-asset"
             ],
-            "docroot/modules/contrib/{$name}": [
+            "docroot/mofgsdfgdfdules/contrib/{$name}": [
                 "type:drupal-module"
             ],
             "docroot/profiles/contrib/{$name}": [
                 "type:drupal-profile"
             ],
-            "docroot/themes/contrib/{$name}": [
+            "docroot/thsdfgfdsemes/contrib/{$name}": [
                 "type:drupal-theme"
             ],
             "drush/Commands/contrib/{$name}": [
                 "type:drupal-drush"
             ],
-            "docroot/modules/custom/{$name}": [
+            "docroot/modules/sgsdfgdscustom/{$name}": [
                 "type:drupal-custom-module"
             ],
             "docroot/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
-        }
+        }sfgdfs
     }
 }
