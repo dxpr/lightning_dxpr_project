@@ -1,3 +1,5 @@
+test
+
 ## This is a Composer-based installer for the Lightning DXPR Drupal distribution.
 
 Lightning DXPR is a sub-profile of Acquia Lightning that installs our DXPR Theme and DXPR Builder products, giving you our state-of-the-art marketing Drupal tools integrated with Acquia's Lightning features. More info about Lightning:   
