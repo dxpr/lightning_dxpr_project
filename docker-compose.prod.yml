@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  
+  ### Override PHP service for production
+  qa-demo:
+    build:
+      context: .
+      args:
+        PHP_TAG: $PHP_TAG
+    volumes:
+    - qa-demo-data:$SITE_INSTALLATION_CONTAINER
+
+  ### Override nginx service for production
+  nginx:
+    volumes:
+    - qa-demo-data:$SITE_INSTALLATION_CONTAINER

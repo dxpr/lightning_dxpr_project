@@ -4,27 +4,17 @@ version: "3.7"
 
 services:
 
-  ### Run the dxpr builder to populate the dxpr-builder volume
-  dxpr-builder:
-    image: dxpr/dxpr_builder:$DXPR_BUILDER_MODE
-    entrypoint: /bin/sh
-    profiles: ["dxpr-builder"]
-    volumes:
-      - dxpr-builder:$DXPR_BUILDER_CONTAINER
-
   ### Adding the php service to build the dxpr/qa-demo image used in the qa-demo service
   qa-demo:
     image: dxpr/qa-demo
-    container_name: "${PROJECT_NAME}_php"
+    container_name: "${PROJECT_NAME}_qa_demo"
     environment:
-      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
-      DXPR_DEMO: $DXPR_DEMO
       DB_USER: $DB_USER
       DB_PASSWORD: $DB_PASSWORD
       DB_NAME: $DB_NAME
       DXPR_ADMIN_PASSWORD: $DXPR_ADMIN_PASSWORD
       DXPR_ACCESS_TOKEN: $DXPR_ACCESS_TOKEN
-      DXPR_BUILDER_MODE: $DXPR_BUILDER_MODE #["dev", "prod"]
+      DXPR_BUILDER_MODE: $DXPR_BUILDER_MODE #["link", "prod"]
       DXPR_BUILDER_CONTAINER: $DXPR_BUILDER_CONTAINER # Defaults to /usr/src/dxpr_builder
     volumes:
     - ./demo-install-init.d:/docker-entrypoint-init.d/

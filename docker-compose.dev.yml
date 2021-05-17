@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  
+  ### Override PHP service for production
+  qa-demo:
+    volumes:
+    - qa-demo-data:$SITE_INSTALLATION_CONTAINER ### Using volumes is easier when cleaning, just delete the volume
+    # - $SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER ### Use bound mount if you know how to clean up the project after installation
+    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER
+
+  ### Override nginx service for production
+  nginx:
+    volumes:
+    - qa-demo-data:$SITE_INSTALLATION_CONTAINER ### Using volumes is easier when cleaning, just delete the volume
+    # - $SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER ### Use bound mount if you know how to clean up the project after installation
+    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER

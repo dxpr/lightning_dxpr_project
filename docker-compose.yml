@@ -7,9 +7,6 @@ volumes:
   ### qa-demo database volume
   qa-demo-db:
 
-  ### qa-demo dxpr_builder module volume
-  dxpr-builder:
-
 services:
 
   #####################
@@ -54,11 +51,6 @@ services:
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_MEMORY_LIMIT: 1024M
-    volumes:
-    - qa-demo-data:/var/www/html:cached # Use volume mount for testing/prod
-    # - $SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER # Use bind mount for local development
-    - dxpr-builder:$DXPR_BUILDER_CONTAINER # Use volume mount for testing/prod
-    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER # Use bind mount for local development
 
   ### Web server
   nginx:
@@ -73,11 +65,6 @@ services:
       NGINX_BACKEND_HOST: $NGINX_BACKEND_HOST
       NGINX_SERVER_ROOT: $NGINX_SERVER_ROOT
       NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
-    volumes:
-    - qa-demo-data:$SITE_INSTALLATION_CONTAINER
-    # - SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER # Use bind mount for local development
-    - dxpr-builder:$DXPR_BUILDER_CONTAINER # Use volume mount for testing/prod
-    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER # Use bind mount for local development
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"

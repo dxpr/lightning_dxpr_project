@@ -10,13 +10,10 @@ env:
   SITE_INSTALLATION_CONTAINER: /var/www/html:cached  ### This is where to mount the site installation volume inside the container
 
   ### DXPR_BUILDER SETUP
-  DXPR_BUILDER_MODE: prod ### Mode: ["dev", "prod"]
-  DXPR_BUILDER_TAG: '1.x' ### A valid git tag or branch
-  DXPR_BUILDER_CONTAINER: /usr/src/dxpr_builder # FOR LOCAL DEVELOPMENT
-  DXPR_BUILDER_HOST: /var/www/html/dxpr/1.x/dxpr_builder/ # FOR LOCAL DEVELOPMENT
+  DXPR_BUILDER_MODE: prod
 
   ### DXPR MAVEN SETUP
-  DXPR_MAVEN_TAG: 'latest' ### A valid git tag or branch
+  DXPR_MAVEN_TAG: latest ### A valid maven image tag
 
   ### PROJECT SETTINGS
   PROJECT_NAME: my_drupal9_project

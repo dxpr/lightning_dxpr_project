@@ -31,7 +31,7 @@ drush site-install lightning_dxpr lightning_dxpr_demo_select.demo_select=$DXPR_D
 # Allow accessing website assets
 chmod -R 777 docroot/sites/default/files
 
-if [ "$DXPR_BUILDER_MODE" = "dev" ]; then
+if [ "$DXPR_BUILDER_MODE" = "link" ]; then
 
   echo "Removing the dxpr builder module"
   rm -rf docroot/modules/contrib/dxpr_builder
@@ -40,3 +40,6 @@ if [ "$DXPR_BUILDER_MODE" = "dev" ]; then
   ln -s $DXPR_BUILDER_CONTAINER docroot/modules/contrib/dxpr_builder
 
 fi
+
+# Remove the DXPR access token from the container composer config for security
+composer config -g --unset bearer.packages.dxpr.com
