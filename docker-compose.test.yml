@@ -35,3 +35,10 @@ services:
     container_name: "${PROJECT_NAME}_maven"
     depends_on:
     - chrome
+    environment:
+      DEMO_HOST: $PROJECT_BASE_URL
+      TEST_SUITE: $TEST_SUITE
+      MAVEN_PROPERTIES: $MAVEN_PROPERTIES
+      MAVEN_BASE_URL: $MAVEN_BASE_URL
+      SELENIUM_HUB_URL: $SELENIUM_HUB_URL
+      ENVIRONMENT: $ENVIRONMENT

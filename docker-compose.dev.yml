@@ -7,11 +7,25 @@ services:
     volumes:
     - qa-demo-data:$SITE_INSTALLATION_CONTAINER ### Using volumes is easier when cleaning, just delete the volume
     # - $SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER ### Use bound mount if you know how to clean up the project after installation
-    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER
+    - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER
 
   ### Override nginx service for production
   nginx:
     volumes:
     - qa-demo-data:$SITE_INSTALLATION_CONTAINER ### Using volumes is easier when cleaning, just delete the volume
     # - $SITE_INSTALLATION:$SITE_INSTALLATION_CONTAINER ### Use bound mount if you know how to clean up the project after installation
-    # - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER
+    - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER
+
+  ### Build the DXPR Builder bind mounted source [NOTE: only enable this profile when the DXPR_BUILDER_MODE=link]
+  grunt:
+    image: dxpr/grunt
+    container_name: "${PROJECT_NAME}_grunt"
+    profiles: ["dxpr-builder"]
+    build:
+      context: ./grunt
+      args:
+        DXPR_BUILDER_CONTAINER: $DXPR_BUILDER_CONTAINER
+    environment:
+      NPM_INSTALL_STAMP: $NPM_INSTALL_STAMP
+    volumes:
+    - $DXPR_BUILDER_HOST:$DXPR_BUILDER_CONTAINER

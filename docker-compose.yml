@@ -43,7 +43,7 @@ services:
 
   ### PHP service with a drupal demo installed
   qa-demo:
-    image: dxpr/qa-demo:latest
+    image: dxpr/qa-demo:$DXPR_DEMO_TAG
     container_name: "${PROJECT_NAME}_qa_demo"
     profiles: ["qa-demo"]
     depends_on:

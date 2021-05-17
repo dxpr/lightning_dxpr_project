@@ -6,9 +6,9 @@ services:
 
   ### Adding the php service to build the dxpr/qa-demo image used in the qa-demo service
   qa-demo:
-    image: dxpr/qa-demo
     container_name: "${PROJECT_NAME}_qa_demo"
     environment:
+      DXPR_DEMO: $DXPR_DEMO
       DB_USER: $DB_USER
       DB_PASSWORD: $DB_PASSWORD
       DB_NAME: $DB_NAME

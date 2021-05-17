@@ -10,7 +10,7 @@ then
 fi
 
 # Configure the dxpr access token
-composer config --global bearer.packages.dxpr.com $DXPR_ACCESS_TOKEN
+composer config -g bearer.packages.dxpr.com $DXPR_ACCESS_TOKEN
 
 # Updating packages if using PHP ^8.0
 if [[ "$PHP_TAG" =~ .*"8.0".* ]]; then
