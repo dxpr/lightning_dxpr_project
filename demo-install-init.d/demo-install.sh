@@ -10,7 +10,7 @@ then
 fi
 
 # Configure the dxpr access token
-composer config --global bearer.packages.dxpr.com $DXPR_ACCESS_TOKEN
+composer config -g bearer.packages.dxpr.com $DXPR_ACCESS_TOKEN
 
 # Updating packages if using PHP ^8.0
 if [[ "$PHP_TAG" =~ .*"8.0".* ]]; then
@@ -30,3 +30,16 @@ drush site-install lightning_dxpr lightning_dxpr_demo_select.demo_select=$DXPR_D
 
 # Allow accessing website assets
 chmod -R 777 docroot/sites/default/files
+
+if [ "$DXPR_BUILDER_MODE" = "link" ]; then
+
+  echo "Removing the dxpr builder module"
+  rm -rf docroot/modules/contrib/dxpr_builder
+
+  echo "Linking to the dxpr builder module"
+  ln -s $DXPR_BUILDER_CONTAINER docroot/modules/contrib/dxpr_builder
+
+fi
+
+# Remove the DXPR access token from the container composer config for security
+composer config -g --unset bearer.packages.dxpr.com

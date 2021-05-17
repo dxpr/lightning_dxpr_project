@@ -1,0 +1,21 @@
+### Compose file to include services that needs to run to perform install and volume population.
+
+version: "3.7"
+
+services:
+
+  ### Adding the php service to build the dxpr/qa-demo image used in the qa-demo service
+  qa-demo:
+    container_name: "${PROJECT_NAME}_qa_demo"
+    environment:
+      DXPR_DEMO: $DXPR_DEMO
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DXPR_ADMIN_PASSWORD: $DXPR_ADMIN_PASSWORD
+      DXPR_ACCESS_TOKEN: $DXPR_ACCESS_TOKEN
+      DXPR_BUILDER_MODE: $DXPR_BUILDER_MODE #["link", "prod"]
+      DXPR_BUILDER_CONTAINER: $DXPR_BUILDER_CONTAINER # Defaults to /usr/src/dxpr_builder
+    volumes:
+    - ./demo-install-init.d:/docker-entrypoint-init.d/
+
