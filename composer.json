@@ -52,7 +52,7 @@
         "cweagans/composer-patches": "^1.6.0",
         "drupal/core-composer-scaffold": "*",
         "oomphinc/composer-installers-extender": "^1.1 || ^2",
-        "dxpr/lightning_dxpr": "test"
+        "dxpr/lightning_dxpr": "dev-test"
     },
     "require-dev": {
         "drush/drush": ">=9.7"
