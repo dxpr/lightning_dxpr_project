@@ -59,7 +59,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "process-timeout": 0
+        "process-timeout": 0,
+        "allow-plugins": {
+            "drupal/core-composer-scaffold": true,
+            "cweagans/composer-patches": true,
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
+        }
     },
     "extra": {
         "enable-patching": true,
