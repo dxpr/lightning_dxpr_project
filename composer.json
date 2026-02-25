@@ -1,17 +1,15 @@
 {
     "name": "dxpr/lightning-dxpr-project",
-    "description": "Project template for Drupal 8 sites built with the DXPR Lightning distribution.",
+    "description": "Project template for Drupal sites built with the DXPR Lightning distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "keywords": [
         "DXPR",
         "Drupal",
-        "Marketing",
-        "Acquia",
-        "Lightning"
+        "Marketing"
     ],
     "support": {
-        "documentation": "https:/.dxpr.com/hc",
+        "documentation": "https://dxpr.com/hc",
         "issues": "https://dxpr.com/hc/tickets"
     },
     "authors": [
@@ -30,28 +28,18 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },{
-            "type": "package",
-            "package": {
-                "name": "ckeditor/fakeobjects",
-                "version": "4.15.1",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.15.1.zip",
-                    "type": "zip"
-                }
-            }
         }
     ],
     "require": {
-        "composer/installers": "^1.2",
+        "composer/installers": "^1.2 || ^2",
         "cweagans/composer-patches": "^1.6.0",
-        "drupal/core-composer-scaffold": "*",
+        "drupal/core-composer-scaffold": "^10.6",
         "oomphinc/composer-installers-extender": "^1.1 || ^2",
-        "dxpr/lightning_dxpr": "3.x-dev"
+        "dxpr/lightning_dxpr": "4.x-dev",
+        "dxpr/dxpr_builder_e": "^0.0.2"
     },
     "require-dev": {
-        "drush/drush": ">=9.7"
+        "drush/drush": "^12.4.3"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -109,6 +97,13 @@
             "docroot/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
             ]
+        },
+        "patches-ignore": {
+            "drupal/lightning_core": {
+                "drupal/core": {
+                    "2869592 - Disabled update module shouldn't produce a status report warning": "https://www.drupal.org/files/issues/2869592-remove-update-warning-7.patch"
+                }
+            }
         }
     }
 }
