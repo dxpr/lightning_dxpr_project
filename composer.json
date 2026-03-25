@@ -65,6 +65,12 @@
             "cweagans/composer-patches": true,
             "composer/installers": true,
             "oomphinc/composer-installers-extender": true
+        },
+        "audit": {
+            "abandoned": "ignore",
+            "ignore": {
+                "SA-CONTRIB-2024-042": "drupal/diff 1.1 - legacy dependency via drupal/lightning_workflow, not exploitable in this context"
+            }
         }
     },
     "extra": {
