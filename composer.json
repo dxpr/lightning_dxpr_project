@@ -69,7 +69,8 @@
         "audit": {
             "abandoned": "ignore",
             "ignore": {
-                "SA-CONTRIB-2024-042": "drupal/diff 1.1 - legacy dependency via drupal/lightning_workflow, not exploitable in this context"
+                "SA-CONTRIB-2024-042": "drupal/diff 1.1 - legacy dependency via drupal/lightning_workflow, not exploitable in this context",
+                "SA-CONTRIB-2025-036": "drupal/panelizer 5.0.0-beta3 - legacy dependency via dxpr/lightning, not exploitable in this context"
             }
         }
     },
